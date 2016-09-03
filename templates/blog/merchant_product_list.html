@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block base_content %}
+
+    <h1>Products</h1>
+
+    {% for product in products %}
+        <h4><a href="#"></a></h4>
+        {% for description in product.ocproductdescription_set.all %}
+            {% if description.language_id == 1 %}
+                <a href="{% url 'show_merchant_product' product.product_id %}">{{ description.name}}</a>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+{% endblock %}
