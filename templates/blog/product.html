@@ -1,0 +1,19 @@
+{% extends 'blog/parse_list_base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+{{ product.title }}
+{% endblock %}
+
+{% block main_content %}
+
+    <h4>{{ product.title }}</h4>
+    <pre>{{ product.description}}</pre>
+    <div class="container-fluid">
+        {% for image in  product.images_list %}
+            <img src="{% static '' %}blog/images/{{ image.path }}" class="img-thumbnail" style="width: 140px; height: 140px;">
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

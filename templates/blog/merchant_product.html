@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    {% for description in product.ocproductdescription_set.all %}
+        {% if description.language_id == 1 %}
+            {{ description.name}}
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block base_content %}
+
+    {% for description in product.ocproductdescription_set.all %}
+        {% if description.language_id == 1 %}
+            <div class="col-sm-8">
+                <h4>{{ description.name}}</h4>
+                <div style="color: #666;">{{ description.description}}</div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

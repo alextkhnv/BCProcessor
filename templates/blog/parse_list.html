@@ -1,0 +1,65 @@
+{% extends 'blog/parse_list_base.html' %}
+
+{% block title %}
+Product parse list
+{% endblock %}
+
+{% block main_content %}
+
+  <h2 class="sub-header">Product parse list</h2>
+    <button id="parse" class="btn btn-success">Parse</button>
+    <div id="parseContent"></div>
+  <div class="table-responsive" style="min-height:610px;">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+        <th>#</th>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Цена</th>
+        <th>Код</th>
+        <th>SKU</th>
+        <th>Статус</th>
+        </tr>
+      </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'show_product' product.id %}">{{ product.title }}</a></td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.cost_usd }}</td>
+                    <td>{{ product.item_code }}</td>
+                    <td>{{ product.sku }}</td>
+                    <td>{{ product.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="large-3 large-offset-5 columns">
+      <ul class="pagination">
+        {%  if products.has_previous %}
+          <li class="arrow"><a href="{% url 'all_product_page' products.previous_page_number %}">&laquo;</a></li>
+        {% else %}
+          <li class="arrow disabled"><a href="">&laquo;</a></li>
+        {% endif %}
+        {% for page in products.paginator.page_range %}
+          {% if page == products.number %}
+            <li class="active"><a href="{% url 'all_product_page' page %}">{{ page }}</a></li>
+          {% else %}
+            <li><a href="{% url 'all_product_page' page %}">{{ page }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if products.has_next %}
+          <li><a href="{% url 'all_product_page' products.next_page_number %}">&raquo;</a></li>
+        {% else %}
+          <li class="arrow disabled"><a href="">&raquo;</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+{% endblock %}

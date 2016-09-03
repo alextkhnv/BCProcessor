@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+Parse List
+{% endblock %}
+
+{% block base_content %}
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            {% if products %}
+              <li class="active"><a href="{% url 'all_product' %}">Товары</a></li>
+            {% else %}
+              <li><a href="{% url 'all_product' %}">Продукты</a></li>
+            {% endif %}
+            {% if categories %}
+              <li class="active"><a href="{% url 'all_category' %}">Категории</a></li>
+            {% else %}
+              <li><a href="{% url 'all_category' %}">Категории</a></li>
+            {% endif %}
+            {% if difference_products %}
+              <li class="active"><a href="{% url 'difference' %}">Новые продукты</a></li>
+            {% else %}
+              <li><a href="{% url 'difference' %}">Новые продукты</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            {% block main_content %}
+            {% endblock %}
+
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
