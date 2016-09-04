@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Article, Comment
+from BCProcessor.models import Article, Comment
 
 # Register your models here.
 class ArticleInline(admin.StackedInline):

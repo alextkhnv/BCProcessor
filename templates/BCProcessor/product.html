@@ -1,4 +1,4 @@
-{% extends 'blog/parse_list_base.html' %}
+{% extends 'BCProcessor/parse_list_base.html' %}
 {% load staticfiles %}
 
 {% block title %}
@@ -11,7 +11,7 @@
     <pre>{{ product.description}}</pre>
     <div class="container-fluid">
         {% for image in  product.images_list %}
-            <img src="{% static '' %}blog/images/{{ image.path }}" class="img-thumbnail" style="width: 140px; height: 140px;">
+            <img src="{% static '' %}BCProcessor/images/{{ image.path }}" class="img-thumbnail" style="width: 140px; height: 140px;">
         {% endfor %}
     </div>
 

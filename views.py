@@ -3,7 +3,7 @@ import json
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
-from blog.models import Article, OcProductDescription, OcProduct, OcCategory, OcCategoryDescription, OcProductImage, Product, DifferenceProduct
+from BCProcessor.models import Article, OcProductDescription, OcProduct, OcCategory, OcCategoryDescription, OcProductImage, Product, DifferenceProduct
 import urllib
 import urllib2
 import unidecode
@@ -22,7 +22,7 @@ def all_product(request, page_number=1):
     context = {
         'products': current_page.page(page_number)
     }
-    return render(request, 'blog/parse_list.html', context)
+    return render(request, 'BCProcessor/parse_list.html', context)
 
 
 def show_product(request, id):
@@ -31,7 +31,7 @@ def show_product(request, id):
     context = {
         'product': product
     }
-    return render(request, 'blog/product.html', context)
+    return render(request, 'BCProcessor/product.html', context)
 
 
 def set_difference(request):
@@ -77,7 +77,7 @@ def difference(request, page_number=1):
     context = {
         'difference_products': current_page.page(page_number)
     }
-    return render(request, 'blog/difference_list.html', context)
+    return render(request, 'BCProcessor/difference_list.html', context)
 
 
 def home(request):
@@ -86,28 +86,28 @@ def home(request):
     context = {
         'articles': articles,
     }
-    return render(request, 'blog/home.html', context)
+    return render(request, 'BCProcessor/home.html', context)
     #response_data = serializers.serialize('json', articles)
     #return HttpResponse(response_data, content_type="application/json")
 
 
 def show_merchant_product(request, product_id=0):
     product = get_object_or_404(OcProduct.objects.using('shop'), product_id=product_id)
-    return render(request, 'blog/merchant_product.html', {'product': product})
+    return render(request, 'BCProcessor/merchant_product.html', {'product': product})
 
 
 def all_merchant_product(request, category_id=0):
     products = OcProduct.objects.using('shop').filter(ocproducttocategory__category=category_id)
-    return render(request, 'blog/merchant_product_list.html', {'products': products})
+    return render(request, 'BCProcessor/merchant_product_list.html', {'products': products})
 
 
 def about(request):
-    return render(request, 'blog/about.html', {'about': True})
+    return render(request, 'BCProcessor/about.html', {'about': True})
 
 
 def show_article(request, article_id):
     article = get_object_or_404(Article, id=article_id)
-    return render(request, 'blog/article.html', {'article': article})
+    return render(request, 'BCProcessor/article.html', {'article': article})
 
 
 def all_category(request, page_number=1):
@@ -116,7 +116,7 @@ def all_category(request, page_number=1):
     context = {
         'categories': current_page.page(page_number)
     }
-    return render(request, 'blog/category_list.html', context)
+    return render(request, 'BCProcessor/category_list.html', context)
 
 
 def parse(request):
@@ -143,7 +143,7 @@ def run_spider(url, values):
 def sync(request):
     data = json.load(codecs.open('d:/Pyton/tutorialScrapy/category.json', 'r', 'utf-8-sig'))
     img_dst = 'D:/OpenServer/domains/ocstore.local/image/catalog/images/'
-    img_src = os.path.join(settings.BASE_DIR, 'blog/static/blog/images/')
+    img_src = os.path.join(settings.BASE_DIR, 'BCProcessor/static/BCProcessor/images/')
     #data = data[17:18]
     for category_item in data:
         title = category_item.get('title')

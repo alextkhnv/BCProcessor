@@ -5,6 +5,7 @@ from blog.views import (home, about, show_article, show_product, parse, all_cate
                         all_product, show_merchant_product, all_merchant_product, sync)
 
 urlpatterns = [
+    url(r'^admin/', admin.site.urls),
     url(r'^$', home, name='home'),
     url(r'^all_merchant_product/(\d+)/$', all_merchant_product, name='all_merchant_product'),
     url(r'^show_merchant_product/(\d+)/$', show_merchant_product, name='show_merchant_product'),
